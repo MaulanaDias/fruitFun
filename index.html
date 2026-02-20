@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      🍎 Fun English Fruits – Belajar Bahasa Inggris Anak Kelas 2 SD
+    </title>
+    <!-- Font ramah anak & icon -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(145deg, #f9f0c1 0%, #fdd998 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Quicksand", sans-serif;
+        padding: 12px;
+      }
+
+      .game-container {
+        max-width: 1100px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(8px);
+        border-radius: 60px 60px 40px 40px;
+        box-shadow:
+          0 20px 30px rgba(0, 0, 0, 0.2),
+          inset 0 2px 5px rgba(255, 255, 255, 0.7);
+        padding: 25px 25px 35px;
+        border: 5px solid #fff9e6;
+      }
+
+      /* Header skor dan judul */
+      .header-game {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #ffb347;
+        padding: 15px 30px;
+        border-radius: 50px;
+        margin-bottom: 30px;
+        color: #2d3e50;
+        box-shadow:
+          0 8px 0 #e07c1f,
+          0 10px 15px rgba(0, 0, 0, 0.1);
+        border: 2px solid #ffeaa5;
+      }
+
+      .header-game h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .header-game h1 i {
+        font-size: 2.5rem;
+        color: #2b5e2b;
+        text-shadow: 2px 2px 0 #ffdd88;
+      }
+
+      .score-area {
+        background: #2e4057;
+        padding: 12px 25px;
+        border-radius: 40px;
+        display: flex;
+        gap: 30px;
+        color: white;
+        font-weight: 700;
+        font-size: 1.7rem;
+        box-shadow:
+          inset 0 -4px 0 #15232e,
+          0 6px 0 #15232e;
+      }
+
+      .score-area span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .score-area i {
+        font-size: 2rem;
+      }
+
+      /* Kartu utama (gambar + audio) */
+      .fruit-showcase {
+        background: #ffead4;
+        border-radius: 70px;
+        padding: 30px 25px 20px;
+        margin-bottom: 30px;
+        border: 4px solid white;
+        box-shadow:
+          0 12px 0 #ce9f6e,
+          0 15px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .fruit-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .fruit-image {
+        width: 240px;
+        height: 240px;
+        border-radius: 130px;
+        object-fit: cover;
+        border: 8px solid white;
+        box-shadow:
+          0 10px 0 #9e6b3e,
+          0 15px 20px rgba(0, 0, 0, 0.2);
+        margin-bottom: 15px;
+        background: #f2d8b3;
+      }
+
+      .audio-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        background: #fef6d8;
+        padding: 12px 30px;
+        border-radius: 60px;
+        border: 3px solid #ffa07a;
+        box-shadow: 0 6px 0 #c05c2b;
+      }
+
+      .fruit-name-label {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: #45250b;
+        text-shadow: 3px 3px 0 #ffc491;
+        letter-spacing: 2px;
+      }
+
+      .play-audio-btn {
+        background: #78b83e;
+        border: none;
+        color: white;
+        font-size: 2.2rem;
+        padding: 15px 25px;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow:
+          0 7px 0 #3f6b1d,
+          0 7px 10px black;
+        transition: all 0.06s ease;
+        border: 2px solid #e9f5d9;
+      }
+
+      .play-audio-btn:active {
+        transform: translateY(6px);
+        box-shadow: 0 2px 0 #3f6b1d;
+      }
+
+      /* pilihan jawaban */
+      .options-area {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
+        margin: 35px 0 20px;
+      }
+
+      .option-btn {
+        background: #ffe66d;
+        border: 4px solid white;
+        color: #2a4832;
+        font-size: 2rem;
+        font-weight: 700;
+        padding: 18px 30px;
+        min-width: 190px;
+        border-radius: 50px;
+        box-shadow:
+          0 9px 0 #b38b40,
+          0 8px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: all 0.06s ease;
+        text-transform: capitalize;
+        flex: 0 1 auto;
+      }
+
+      .option-btn:active {
+        transform: translateY(7px);
+        box-shadow: 0 2px 0 #b38b40;
+      }
+
+      .option-btn.correct-glow {
+        background: #9bde7e;
+        box-shadow: 0 0 15px #42f55c;
+      }
+
+      .option-btn.wrong-flash {
+        background: #ff8a8a;
+        box-shadow: 0 0 15px #ff3b3b;
+      }
+
+      .option-btn:disabled {
+        opacity: 0.6;
+        transform: translateY(5px);
+        box-shadow: 0 4px 0 #b38b40;
+        cursor: not-allowed;
+      }
+
+      /* Feedback benar/salah + tombol next */
+      .feedback-next {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #a7d0cd;
+        padding: 10px 30px 10px 40px;
+        border-radius: 50px;
+        border: 4px solid #ebf5df;
+        box-shadow: 0 7px 0 #58858f;
+        margin-top: 15px;
+      }
+
+      .feedback-message {
+        font-size: 2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .feedback-message i {
+        font-size: 2.5rem;
+      }
+
+      .next-btn {
+        background: #4169e1;
+        border: none;
+        color: white;
+        font-size: 2rem;
+        font-weight: 700;
+        padding: 12px 35px;
+        border-radius: 40px;
+        box-shadow:
+          0 7px 0 #1f3a7a,
+          0 6px 12px black;
+        cursor: pointer;
+        transition: 0.06s linear;
+        border: 3px solid #b0c4ff;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .next-btn:active {
+        transform: translateY(6px);
+        box-shadow: 0 2px 0 #1f3a7a;
+      }
+
+      .next-btn:disabled {
+        opacity: 0.5;
+        transform: translateY(4px);
+        box-shadow: 0 3px 0 #1f3a7a;
+        pointer-events: none;
+      }
+
+      /* footer ulang permainan */
+      .reset-area {
+        display: flex;
+        justify-content: center;
+        margin-top: 25px;
+      }
+
+      .reset-btn {
+        background: #f4a460;
+        border: none;
+        font-size: 1.8rem;
+        font-weight: 700;
+        padding: 12px 40px;
+        border-radius: 40px;
+        color: #2d1b0f;
+        box-shadow:
+          0 7px 0 #b96f2e,
+          0 6px 12px black;
+        cursor: pointer;
+        border: 3px solid #ffe1b3;
+        transition: 0.06s;
+      }
+
+      .reset-btn:active {
+        transform: translateY(6px);
+        box-shadow: 0 2px 0 #b96f2e;
+      }
+
+      /* responsif untuk tablet */
+      @media (max-width: 700px) {
+        .header-game {
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+        }
+        .fruit-image {
+          width: 170px;
+          height: 170px;
+        }
+        .option-btn {
+          font-size: 1.7rem;
+          padding: 15px 20px;
+          min-width: 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container">
+      <!-- header dengan skor -->
+      <div class="header-game">
+        <h1>
+          <i class="fas fa-apple-alt"></i> Fruit Fun <i class="fas fa-leaf"></i>
+        </h1>
+        <div class="score-area">
+          <span
+            ><i class="fas fa-star" style="color: #ffd966"></i>
+            <span id="scoreCorrect">0</span></span
+          >
+          <span
+            ><i class="fas fa-times-circle" style="color: #ffaaaa"></i>
+            <span id="scoreWrong">0</span></span
+          >
+        </div>
+      </div>
+
+      <!-- area utama gambar dan audio -->
+      <div class="fruit-showcase">
+        <div class="fruit-card">
+          <img
+            id="fruitImg"
+            class="fruit-image"
+            src="https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?w=400&h=400&fit=crop&auto=format"
+            alt="fruit"
+          />
+          <div class="audio-row">
+            <span class="fruit-name-label" id="fruitNameEng">Apple</span>
+            <button
+              class="play-audio-btn"
+              id="playAudioBtn"
+              aria-label="dengarkan"
+            >
+              <i class="fas fa-volume-up"></i>
+              <span style="font-size: 1.2rem">🔊</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- pilihan ganda -->
+      <div id="optionsContainer" class="options-area">
+        <!-- javascript akan mengisi 4 tombol -->
+      </div>
+
+      <!-- feedback dan next -->
+      <div class="feedback-next">
+        <div id="feedbackMsg" class="feedback-message">
+          <i class="far fa-smile-wink" style="color: #2b5e2b"></i>
+          <span id="feedbackText">Ayo pilih jawabannya!</span>
+        </div>
+        <button class="next-btn" id="nextBtn" disabled>
+          <i class="fas fa-arrow-right"></i> Next
+        </button>
+      </div>
+
+      <!-- reset game -->
+      <div class="reset-area">
+        <button class="reset-btn" id="resetGameBtn">
+          <i class="fas fa-redo-alt"></i> Main Lagi
+        </button>
+      </div>
+    </div>
+
+    <audio id="audioPlayer" src=""></audio>
+
+    <script>
+      (function () {
+        // data buah: nama inggris, nama indonesia (untuk teks tombol), unsplash image (asli), dan file audio dari free sound (text-to-speech / creative commons)
+        // kita gunakan link suara dari responsivevoice via say.js? sebenarnya kita pakai speech synthesis, agar lebih ringan dan ramah anak.
+        // TAPI karena diminta "beri audio untuk nama buah dalam bahasa inggris", kita akan gunakan Web Speech API (tersedia di chrome, edge).
+        // alternatif jika tidak support: fallback ke nothing, tapi hampir semua device modern mendukung.
+        const fruitData = [
+          {
+            english: "Banana",
+            indo: "Pisang",
+            image:
+              "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop&auto=format",
+            audioText: "Banana",
+          },
+          {
+            english: "Orange",
+            indo: "Jeruk",
+            image:
+              "https://images.unsplash.com/photo-1547514701-42782101795e?w=400&h=400&fit=crop&auto=format",
+            audioText: "Orange",
+          },
+          {
+            english: "Strawberry",
+            indo: "Stroberi",
+            image:
+              "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?q=80&w=415&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            audioText: "Strawberry",
+          },
+          {
+            english: "Grapes",
+            indo: "Anggur",
+            image:
+              "https://images.unsplash.com/photo-1596363505729-4190a9506133?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            audioText: "Grapes",
+          },
+          {
+            english: "Pineapple",
+            indo: "Nanas",
+            image:
+              "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            audioText: "Pineapple",
+          },
+        ];
+
+        // state game
+        let currentFruitIndex = 0; // index buah yang ditampilkan
+        let correctCount = 0;
+        let wrongCount = 0;
+        let locked = false; // setelah jawab, tombol dikunci
+        let options = [];
+        let correctAnswer = "";
+
+        // elemen DOM
+        const fruitImg = document.getElementById("fruitImg");
+        const fruitNameEngSpan = document.getElementById("fruitNameEng");
+        const playAudioBtn = document.getElementById("playAudioBtn");
+        const optionsContainer = document.getElementById("optionsContainer");
+        const feedbackText = document.getElementById("feedbackText");
+        const feedbackMsgDiv = document.getElementById("feedbackMsg");
+        const nextBtn = document.getElementById("nextBtn");
+        const resetBtn = document.getElementById("resetGameBtn");
+        const scoreCorrectSpan = document.getElementById("scoreCorrect");
+        const scoreWrongSpan = document.getElementById("scoreWrong");
+        const audioPlayer = document.getElementById("audioPlayer"); // tidak dipakai langsung, kita pakai speechSynthesis
+
+        // inisialisasi: ambil data pertama
+        function shuffleArray(arr) {
+          for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+          }
+          return arr;
+        }
+
+        function generateOptions(correctEng) {
+          // siapkan 4 pilihan: 1 correct + 3 random berbeda dari fruitData (selain correct)
+          let otherFruits = fruitData
+            .filter((f) => f.english !== correctEng)
+            .map((f) => f.english);
+          // ambil 3 unik secara acak
+          let selectedOthers = [];
+          if (otherFruits.length >= 3) {
+            let shuffled = shuffleArray([...otherFruits]);
+            selectedOthers = shuffled.slice(0, 3);
+          } else {
+            // fallback jika kurang (tidak mungkin karena kita punya 6 data)
+            selectedOthers = ["Apple", "Banana", "Orange"].filter(
+              (x) => x !== correctEng,
+            );
+          }
+          let opts = [correctEng, ...selectedOthers];
+          return shuffleArray(opts);
+        }
+
+        function loadFruit(index) {
+          const fruit = fruitData[index];
+          if (!fruit) return;
+          fruitImg.src = fruit.image;
+          fruitNameEngSpan.textContent = fruit.english;
+          correctAnswer = fruit.english;
+
+          // buat pilihan ganda
+          options = generateOptions(fruit.english);
+          renderOptions(options);
+
+          // reset feedback
+          feedbackText.innerText = "Coba pilih jawaban!";
+          feedbackMsgDiv.innerHTML =
+            '<i class="far fa-smile-wink" style="color: #2b5e2b;"></i> <span id="feedbackText">Coba pilih jawaban!</span>';
+          // aktifkan semua tombol dan hilangkan kelas warna
+          document.querySelectorAll(".option-btn").forEach((btn) => {
+            btn.disabled = false;
+            btn.classList.remove("correct-glow", "wrong-flash");
+          });
+
+          // kunci next, unlock setelah jawab
+          nextBtn.disabled = true;
+          locked = false;
+        }
+
+        function renderOptions(opts) {
+          optionsContainer.innerHTML = "";
+          opts.forEach((opt) => {
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            // cari nama indonesia untuk teks tombol (anak lebih kenal)
+            const fruit = fruitData.find((f) => f.english === opt);
+            const displayText = fruit ? fruit.indo : opt;
+            btn.textContent = displayText;
+            btn.dataset.english = opt;
+            btn.addEventListener("click", optionClickHandler);
+            optionsContainer.appendChild(btn);
+          });
+        }
+
+        // Fungsi bicara (speech synthesis)
+        function speakEnglish(text) {
+          if (!window.speechSynthesis) {
+            alert("Browser tidak mendukung text-to-speech :(");
+            return;
+          }
+          // hentikan yang sedang bicara
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "en-US";
+          utterance.rate = 0.9; // lebih lambat untuk anak
+          utterance.pitch = 1.2;
+          window.speechSynthesis.speak(utterance);
+        }
+
+        // Event handler jawaban
+        function optionClickHandler(e) {
+          if (locked) return;
+          const selectedBtn = e.currentTarget;
+          const selectedEnglish = selectedBtn.dataset.english;
+
+          // kunci semua
+          locked = true;
+          document
+            .querySelectorAll(".option-btn")
+            .forEach((btn) => (btn.disabled = true));
+
+          // cek benar atau salah
+          const isCorrect = selectedEnglish === correctAnswer;
+          let feedbackIcon = "";
+          if (isCorrect) {
+            correctCount++;
+            feedbackIcon = "✅";
+            feedbackText.innerText = "Benar! Mantap!";
+            feedbackMsgDiv.innerHTML = `<i class="fas fa-check-circle" style="color:#2e7d32;"></i> <span id="feedbackText">Benar! Mantap!</span>`;
+            // beri efek hijau ke tombol yang dipilih
+            selectedBtn.classList.add("correct-glow");
+          } else {
+            wrongCount++;
+            feedbackIcon = "❌";
+            feedbackText.innerText = "Wah, kurang tepat… coba lagi nanti.";
+            feedbackMsgDiv.innerHTML = `<i class="fas fa-times-circle" style="color:#b71c1c;"></i> <span id="feedbackText">Wah, kurang tepat…</span>`;
+            selectedBtn.classList.add("wrong-flash");
+            // tandai juga jawaban yang benar (untuk belajar)
+            document.querySelectorAll(".option-btn").forEach((btn) => {
+              if (btn.dataset.english === correctAnswer) {
+                btn.classList.add("correct-glow");
+              }
+            });
+          }
+
+          // update skor
+          updateScore();
+
+          // aktifkan tombol next
+          nextBtn.disabled = false;
+        }
+
+        function updateScore() {
+          scoreCorrectSpan.textContent = correctCount;
+          scoreWrongSpan.textContent = wrongCount;
+        }
+
+        // next fruit
+        function nextFruit() {
+          if (nextBtn.disabled) return; // hanya kalau sudah menjawab
+
+          // pindah ke buah berikutnya (siklus)
+          currentFruitIndex = (currentFruitIndex + 1) % fruitData.length;
+          loadFruit(currentFruitIndex);
+        }
+
+        // reset game
+        function resetGame() {
+          correctCount = 0;
+          wrongCount = 0;
+          updateScore();
+          currentFruitIndex = 0; // mulai dari awal
+          loadFruit(currentFruitIndex);
+          // cancel speech
+          if (window.speechSynthesis) window.speechSynthesis.cancel();
+        }
+
+        // event listener
+        playAudioBtn.addEventListener("click", () => {
+          const fruit = fruitData[currentFruitIndex];
+          if (fruit) {
+            speakEnglish(fruit.english);
+          }
+        });
+
+        nextBtn.addEventListener("click", nextFruit);
+
+        resetBtn.addEventListener("click", resetGame);
+
+        // muat pertama kali
+        loadFruit(0);
+
+        // tambahan: jika ingin play otomatis setelah gambar gak usah
+
+        // optional: fallback jika gambar unsplash error ganti dengan place holder lucu (tidak perlu, unsplash ok)
+
+        // supaya lebih aman, kita cek gambar error (opsional)
+        fruitImg.addEventListener("error", function () {
+          this.src =
+            "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c?w=400&h=400&fit=crop&auto=format"; // buah campuran
+        });
+      })();
+    </script>
+  </body>
+</html>
